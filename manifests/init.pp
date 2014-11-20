@@ -13,9 +13,9 @@
 #
 # == Examples
 #
-# class { 'mdns':
-#   allow_ipv4_address => '192.168.0.0/24',
-# } 
+#   class { 'mdns':
+#       allow_ipv4_address => '192.168.0.0/24',
+#   } 
 #
 # == Authors
 #
@@ -23,8 +23,7 @@
 #
 # == License
 #
-# BSD-license
-# See file LICENSE for details
+# BSD-license. See file LICENSE for details.
 #
 class mdns
 (
