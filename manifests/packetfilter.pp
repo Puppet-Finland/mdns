@@ -10,37 +10,34 @@ class mdns::packetfilter
 )
 {
 
+    Firewall {
+        chain    => 'INPUT',
+        action   => 'accept',
+    }
+
     # IPv4 rules
     firewall { '016 ipv4 accept multicast':
         provider => 'iptables',
-        chain => 'INPUT',
-        pkttype => 'multicast',
-        action => 'accept',
+        pkttype  => 'multicast',
     }
 
     firewall { '016 ipv4 accept mdns port':
         provider => 'iptables',
-        chain => 'INPUT',
-        proto => 'udp',
-        port => 5353,
-        source => "$allow_ipv4_address",
-        action => 'accept',
+        proto    => 'udp',
+        port     => 5353,
+        source   => $allow_ipv4_address,
     }
 
     # IPv6 rules
     firewall { '016 ipv6 accept multicast':
         provider => 'ip6tables',
-        chain => 'INPUT',
-        pkttype => 'multicast',
-        action => 'accept',
+        pkttype  => 'multicast',
     }
 
     firewall { '016 ipv6 accept mdns port':
         provider => 'ip6tables',
-        chain => 'INPUT',
-        proto => 'udp',
-        port => 5353,
-        source => "$allow_ipv6_address",
-        action => 'accept',
+        proto    => 'udp',
+        port     => 5353,
+        source   => $allow_ipv6_address,
     }
 }

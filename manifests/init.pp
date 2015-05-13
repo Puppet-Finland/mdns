@@ -5,6 +5,8 @@
 #
 # == Parameters
 #
+# [*manage*]
+#   Manage MDNS using Puppet. Valid values are 'yes' (default) and 'no'.
 # [*allow_ipv4_address*]
 #   IPv4 address from which to allow packets to UDP port 5353. Packets of 
 #   multicast type are always allowed. Default value is '127.0.0.1'.
@@ -27,15 +29,15 @@
 #
 class mdns
 (
+    $manage = 'yes',
     $allow_ipv4_address = '127.0.0.1',
     $allow_ipv6_address = '::1'
 )
 {
 
-# Rationale for this is explained in init.pp of the sshd module
-if hiera('manage_mdns', 'true') != 'false' {
+if $manage == 'yes' {
 
-    class { 'mdns::packetfilter':
+    class { '::mdns::packetfilter':
         allow_ipv4_address => $allow_ipv4_address,
         allow_ipv6_address => $allow_ipv6_address,
     }
